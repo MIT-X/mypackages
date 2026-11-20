@@ -22,75 +22,93 @@ jobs:
 
       - name: Sync OpenAppFilter
         run: |
-          rm -rf OpenAppFilter
-          mkdir -p OpenAppFilter
-          git clone --depth 1 https://github.com/destan19/OpenAppFilter.git /tmp/oaf
-          cp -r /tmp/oaf/* OpenAppFilter/
-          rm -rf OpenAppFilter/.git
+          git clone --depth 1 https://github.com/destan19/OpenAppFilter.git /tmp/oaf || true
+          if [ -d "/tmp/oaf" ]; then
+            rm -rf OpenAppFilter
+            mkdir -p OpenAppFilter
+            cp -r /tmp/oaf/* OpenAppFilter/
+            rm -rf OpenAppFilter/.git
+          fi
 
       - name: Sync luci-app-bandix
         run: |
-          rm -rf luci-app-bandix
-          mkdir -p luci-app-bandix
-          git clone --depth 1 https://github.com/timsaya/luci-app-bandix.git /tmp/bandix
-          cp -r /tmp/bandix/* luci-app-bandix/
-          rm -rf luci-app-bandix/.git
+          git clone --depth 1 https://github.com/timsaya/luci-app-bandix.git /tmp/bandix || true
+          if [ -d "/tmp/bandix" ]; then
+            rm -rf luci-app-bandix
+            mkdir -p luci-app-bandix
+            cp -r /tmp/bandix/* luci-app-bandix/
+            rm -rf luci-app-bandix/.git
+          fi
 
       - name: Sync luci-app-gecoosac
         run: |
-          rm -rf luci-app-gecoosac
-          mkdir -p luci-app-gecoosac
-          git clone --depth 1 https://github.com/laipeng668/luci-app-gecoosac.git /tmp/gecoosac
-          cp -r /tmp/gecoosac/* luci-app-gecoosac/
-          rm -rf luci-app-gecoosac/.git
+          git clone --depth 1 https://github.com/laipeng668/luci-app-gecoosac.git /tmp/gecoosac || true
+          if [ -d "/tmp/gecoosac" ]; then
+            rm -rf luci-app-gecoosac
+            mkdir -p luci-app-gecoosac
+            cp -r /tmp/gecoosac/* luci-app-gecoosac/
+            rm -rf luci-app-gecoosac/.git
+          fi
 
       - name: Sync luci-app-upnp (from VIKINGYFY/packages)
         run: |
-          rm -rf luci-app-upnp
-          mkdir -p luci-app-upnp
-          git clone --depth 1 https://github.com/VIKINGYFY/packages.git /tmp/viking
-          cp -r /tmp/viking/luci-app-upnp/* luci-app-upnp/
-          rm -rf luci-app-upnp/.git
+          git clone --depth 1 https://github.com/VIKINGYFY/packages.git /tmp/viking || true
+          if [ -d "/tmp/viking/luci-app-upnp" ]; then
+            rm -rf luci-app-upnp
+            mkdir -p luci-app-upnp
+            cp -r /tmp/viking/luci-app-upnp/* luci-app-upnp/
+            rm -rf luci-app-upnp/.git
+          fi
 
       - name: Sync miniupnpd (from VIKINGYFY/packages)
         run: |
-          rm -rf miniupnpd
-          mkdir -p miniupnpd
-          git clone --depth 1 https://github.com/VIKINGYFY/packages.git /tmp/viking2
-          cp -r /tmp/viking2/miniupnpd/* miniupnpd/
-          rm -rf miniupnpd/.git
+          git clone --depth 1 https://github.com/VIKINGYFY/packages.git /tmp/viking2 || true
+          if [ -d "/tmp/viking2/miniupnpd" ]; then
+            rm -rf miniupnpd
+            mkdir -p miniupnpd
+            cp -r /tmp/viking2/miniupnpd/* miniupnpd/
+            rm -rf miniupnpd/.git
+          fi
 
       - name: Sync luci-app-lanspeed
         run: |
-          rm -rf luci-app-lanspeed
-          mkdir -p luci-app-lanspeed
-          git clone --depth 1 https://github.com/qimaoww/luci-app-lanspeed.git /tmp/lanspeed
-          cp -r /tmp/lanspeed/* luci-app-lanspeed/
-          rm -rf luci-app-lanspeed/.git
+          git clone --depth 1 https://github.com/qimaoww/luci-app-lanspeed.git /tmp/lanspeed || true
+          if [ -d "/tmp/lanspeed" ]; then
+            rm -rf luci-app-lanspeed
+            mkdir -p luci-app-lanspeed
+            cp -r /tmp/lanspeed/* luci-app-lanspeed/
+            rm -rf luci-app-lanspeed/.git
+          fi
 
       - name: Sync passwall2
         run: |
-          rm -rf passwall2
-          mkdir -p passwall2
-          git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall2.git /tmp/pw2
-          cp -r /tmp/pw2/* passwall2/
-          rm -rf passwall2/.git
+          git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall2.git /tmp/pw2 || true
+          if [ -d "/tmp/pw2" ]; then
+            rm -rf passwall2
+            mkdir -p passwall2
+            cp -r /tmp/pw2/* passwall2/
+            rm -rf passwall2/.git
+          fi
 
       - name: Sync passwall-packages
         run: |
-          rm -rf passwall-packages
-          mkdir -p passwall-packages
-          git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git /tmp/pwpkg
-          cp -r /tmp/pwpkg/* passwall-packages/
-          rm -rf passwall-packages/.git
+          git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git /tmp/pwpkg || true
+          if [ -d "/tmp/pwpkg" ]; then
+            rm -rf passwall-packages
+            mkdir -p passwall-packages
+            cp -r /tmp/pwpkg/* passwall-packages/
+            rm -rf passwall-packages/.git
+          fi
 
       - name: Sync luci-app-honk
         run: |
-          rm -rf luci-app-honk
-          mkdir -p luci-app-honk
-          git clone --depth 1 https://github.com/QiuSimons/luci-app-honk.git /tmp/honk
-          cp -r /tmp/honk/* luci-app-honk/
-          rm -rf luci-app-honk/.git
+          git clone --depth 1 https://github.com/QiuSimons/luci-app-honk.git /tmp/honk || true
+          if [ -d "/tmp/honk" ]; then
+            rm -rf luci-app-honk
+            mkdir -p luci-app-honk
+            cp -r /tmp/honk/* luci-app-honk/
+            rm -rf luci-app-honk/.git
+          fi
 
       - name: Commit & Push changes
         run: |
