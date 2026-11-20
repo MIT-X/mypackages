@@ -1,0 +1,110 @@
+name: Sync
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Set git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync OpenAppFilter
+        run: |
+          rm -rf OpenAppFilter
+          mkdir -p OpenAppFilter
+          git clone --depth 1 https://github.com/destan19/OpenAppFilter.git /tmp/oaf
+          cp -r /tmp/oaf/* OpenAppFilter/
+          rm -rf OpenAppFilter/.git
+
+      - name: Sync luci-app-bandix
+        run: |
+          rm -rf luci-app-bandix
+          mkdir -p luci-app-bandix
+          git clone --depth 1 https://github.com/timsaya/luci-app-bandix.git /tmp/bandix
+          cp -r /tmp/bandix/* luci-app-bandix/
+          rm -rf luci-app-bandix/.git
+
+      - name: Sync luci-app-gecoosac
+        run: |
+          rm -rf luci-app-gecoosac
+          mkdir -p luci-app-gecoosac
+          git clone --depth 1 https://github.com/laipeng668/luci-app-gecoosac.git /tmp/gecoosac
+          cp -r /tmp/gecoosac/* luci-app-gecoosac/
+          rm -rf luci-app-gecoosac/.git
+
+      - name: Sync luci-app-upnp (from VIKINGYFY/packages)
+        run: |
+          rm -rf luci-app-upnp
+          mkdir -p luci-app-upnp
+          git clone --depth 1 https://github.com/VIKINGYFY/packages.git /tmp/viking
+          cp -r /tmp/viking/luci-app-upnp/* luci-app-upnp/
+          rm -rf luci-app-upnp/.git
+
+      - name: Sync miniupnpd (from VIKINGYFY/packages)
+        run: |
+          rm -rf miniupnpd
+          mkdir -p miniupnpd
+          git clone --depth 1 https://github.com/VIKINGYFY/packages.git /tmp/viking2
+          cp -r /tmp/viking2/miniupnpd/* miniupnpd/
+          rm -rf miniupnpd/.git
+
+      - name: Sync luci-app-lanspeed
+        run: |
+          rm -rf luci-app-lanspeed
+          mkdir -p luci-app-lanspeed
+          git clone --depth 1 https://github.com/qimaoww/luci-app-lanspeed.git /tmp/lanspeed
+          cp -r /tmp/lanspeed/* luci-app-lanspeed/
+          rm -rf luci-app-lanspeed/.git
+
+      - name: Sync passwall2
+        run: |
+          rm -rf passwall2
+          mkdir -p passwall2
+          git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall2.git /tmp/pw2
+          cp -r /tmp/pw2/* passwall2/
+          rm -rf passwall2/.git
+
+      - name: Sync passwall-packages
+        run: |
+          rm -rf passwall-packages
+          mkdir -p passwall-packages
+          git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git /tmp/pwpkg
+          cp -r /tmp/pwpkg/* passwall-packages/
+          rm -rf passwall-packages/.git
+
+      - name: Sync luci-app-honk
+        run: |
+          rm -rf luci-app-honk
+          mkdir -p luci-app-honk
+          git clone --depth 1 https://github.com/QiuSimons/luci-app-honk.git /tmp/honk
+          cp -r /tmp/honk/* luci-app-honk/
+          rm -rf luci-app-honk/.git
+
+      - name: Commit & Push changes
+        run: |
+          git add \
+            OpenAppFilter \
+            luci-app-bandix \
+            luci-app-gecoosac \
+            luci-app-upnp \
+            miniupnpd \
+            luci-app-lanspeed \
+            passwall2 \
+            passwall-packages \
+            luci-app-honk
+          git diff --cached --quiet || {
+            git commit -m "🔄 $(date -u '+%Y-%m-%d')"
+            git push origin main
+          }
