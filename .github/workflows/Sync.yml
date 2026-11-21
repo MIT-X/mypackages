@@ -80,24 +80,24 @@ jobs:
             rm -rf luci-app-lanspeed/.git
           fi
 
-      - name: Sync passwall2
+      - name: Sync openwrt-passwall2
         run: |
           git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall2.git /tmp/pw2 || true
           if [ -d "/tmp/pw2" ]; then
-            rm -rf passwall2
-            mkdir -p passwall2
-            cp -r /tmp/pw2/* passwall2/
-            rm -rf passwall2/.git
+            rm -rf openwrt-passwall2
+            mkdir -p openwrt-passwall2
+            cp -r /tmp/pw2/* openwrt-passwall2/
+            rm -rf openwrt-passwall2/.git
           fi
 
-      - name: Sync passwall-packages
+      - name: Sync openwrt-passwall-packages
         run: |
           git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git /tmp/pwpkg || true
           if [ -d "/tmp/pwpkg" ]; then
-            rm -rf passwall-packages
-            mkdir -p passwall-packages
-            cp -r /tmp/pwpkg/* passwall-packages/
-            rm -rf passwall-packages/.git
+            rm -rf openwrt-passwall-packages
+            mkdir -p openwrt-passwall-packages
+            cp -r /tmp/pwpkg/* openwrt-passwall-packages/
+            rm -rf openwrt-passwall-packages/.git
           fi
 
       - name: Sync luci-app-honk
@@ -119,8 +119,8 @@ jobs:
             luci-app-upnp \
             miniupnpd \
             luci-app-lanspeed \
-            passwall2 \
-            passwall-packages \
+            openwrt-passwall2 \
+            openwrt-passwall-packages \
             luci-app-honk
           git diff --cached --quiet || {
             git commit -m "🔄 $(date -u '+%Y-%m-%d')"
