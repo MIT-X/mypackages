@@ -1,0 +1,160 @@
+/* N60 首页面板 · 作用域限定 .n60 */
+.n60{
+  padding-top:18px;          /* 与 LuCI 顶栏留出呼吸 */
+  --bg:#f4f5f7; --card:#fff; --ink:#12151b; --ink2:#5b6270; --ink3:#9aa1af;
+  --line:#e8eaef; --line2:#f1f2f6;
+  --blue:#3b5bfd; --blue-soft:#eef1ff; --green:#12a150; --green-soft:#e9f8ef;
+  --amber:#c47b00; --amber-soft:#fff6e5; --violet:#7a5af8; --red:#d93025;
+  box-sizing:border-box; color:var(--ink);
+  font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.n60 *,.n60 *::before,.n60 *::after{box-sizing:border-box}
+.n60 .num{font-variant-numeric:tabular-nums}
+.n60 .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+
+/* 顶栏 */
+.n60-hd{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 16px}
+.n60-hd .lg{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#3b5bfd,#6f8cff);box-shadow:0 3px 10px rgba(59,91,253,.28);flex:0 0 auto}
+.n60-hd .lg svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round}
+.n60-hd .tt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.n60-hd .tt b{font-size:16px;font-weight:650;letter-spacing:.01em}
+.n60-hd .tt span{font-size:11.5px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.n60-pills{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.n60-pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:9px;
+  font-size:12px;color:var(--ink2);background:#fff;border:1px solid var(--line)}
+.n60-pill b{color:var(--ink);font-weight:600}
+.n60-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 0 3px rgba(18,161,80,.12)}
+.n60-pill.warn{background:var(--amber-soft);border-color:#ffe9bf;color:#8a5a00}
+.n60-pill.warn .dot{background:var(--amber);box-shadow:0 0 0 3px rgba(196,123,0,.12)}
+.n60-pill.down{background:#fdeceb;border-color:#f8d5d2;color:#a8241c}
+.n60-pill.down .dot{background:var(--red);box-shadow:0 0 0 3px rgba(217,48,37,.12)}
+
+/* 网格 */
+.n60-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.n60 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;
+  box-shadow:0 1px 2px rgba(16,24,40,.03);min-width:0}
+.n60 .card h3{font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:8px;margin:0}
+.n60 .card h3 .sub{margin-left:auto;font-weight:500;color:var(--ink3);font-size:11.5px}
+
+/* 顶部身份长卡：独立成卡后文字不会压在顶栏颜色交界上 */
+.n60 .hdr{grid-column:span 12;display:flex;align-items:center;gap:14px;padding:11px 18px}
+.n60 .hdr .lg{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto;
+  background:linear-gradient(145deg,#3b5bfd,#6f8cff);box-shadow:0 3px 10px rgba(59,91,253,.28)}
+.n60 .hdr .lg svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round}
+.n60 .hdr .tt{display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.n60 .hdr .tt b{font-size:16px;font-weight:650;letter-spacing:.01em}
+.n60 .hdr .tt span{font-size:11.5px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* KPI 五连：整行 20% 等分，不切 12 栅格 */
+.n60 .krow{grid-column:span 12;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.n60 .krow .kpi{grid-column:auto}
+
+/* KPI */
+.n60 .kpi{grid-column:span 3;display:flex;flex-direction:column;gap:8px}
+.n60 .kpi .lab{font-size:12px;color:var(--ink3);display:flex;align-items:center;gap:7px}
+.n60 .kpi .lab .ic{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--blue-soft);flex:0 0 auto}
+.n60 .kpi .lab .ic svg{width:12px;height:12px;stroke:var(--blue);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.n60 .kpi .lab.g .ic{background:var(--green-soft)}
+.n60 .kpi .lab.g .ic svg{stroke:var(--green)}
+.n60 .kpi .lab.v .ic{background:#f3f0ff}
+.n60 .kpi .lab.v .ic svg{stroke:var(--violet)}
+.n60 .kpi .lab.o .ic{background:#fff4e8}
+.n60 .kpi .lab.o .ic svg{stroke:#d98200}
+.n60 .kpi .big{font-size:27px;font-weight:680;letter-spacing:-.02em;line-height:1.1;word-break:break-all}
+.n60 .kpi .big small{font-size:13px;font-weight:550;color:var(--ink3);margin-left:5px;letter-spacing:0}
+.n60 .kpi .foot{font-size:11.5px;color:var(--ink3);display:flex;align-items:center;gap:8px;margin-top:auto;flex-wrap:wrap}
+.n60 .kpi .foot b{color:var(--ink2);font-weight:600}
+.n60 .dual{margin-left:auto;font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--green);
+  background:var(--green-soft);border:1px solid #d5f0e0;padding:1px 6px;border-radius:5px}
+.n60 .wan-row{display:flex;align-items:flex-start;gap:9px;padding:6px 0}
+.n60 .wan-row+.wan-row{border-top:1px dashed var(--line)}
+.n60 .fam{flex:0 0 auto;margin-top:2px;font-size:9.5px;font-weight:700;letter-spacing:.06em;
+  color:#2f5fc4;background:#e9f0ff;border-radius:4px;padding:1px 5px;font-family:ui-monospace,monospace}
+.n60 .fam.v6{color:#6143d0;background:#f3f0ff}
+.n60 .v4{font-size:22px;font-weight:680;letter-spacing:-.01em;line-height:1.25;cursor:pointer;word-break:break-all}
+.n60 .v6{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.42;
+  letter-spacing:-.015em;color:var(--ink2);cursor:pointer;word-break:break-all}
+.n60 .v6 em{color:#a8b0c0;font-style:normal}
+.n60 .v4:hover,.n60 .v6:hover{color:var(--blue)}
+.n60 .exp{font-size:10px;color:var(--ink3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 延迟：绿/琥珀/红三档，跟着 IPv4 状态行 */
+.n60 .exp b.lat{font-weight:600;font-variant-numeric:tabular-nums}
+.n60 .exp b.lat.ok{color:var(--green)}
+.n60 .exp b.lat.mid{color:var(--amber)}
+.n60 .exp b.lat.bad{color:var(--red)}
+.n60 .dots{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.n60 .dots i{width:13px;height:13px;border-radius:4px;background:#eef0f5;border:1px solid #e4e7ee}
+.n60 .dots i.on{background:var(--green);border-color:var(--green);box-shadow:0 0 0 2px rgba(18,161,80,.1)}
+.n60 .prog{height:6px;border-radius:4px;background:var(--line2);overflow:hidden;margin:6px 0}
+.n60 .prog i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#3b5bfd,#7a5af8);
+  transition:width .5s ease}
+.n60 .prog.warn i{background:linear-gradient(90deg,#e8a13a,#c47b00)}
+.n60 .prog.hot i{background:linear-gradient(90deg,#e2593f,#c22e1c)}
+.n60 .spark{display:block;width:100%;height:40px}
+.n60 .spark svg{display:block;width:100%;height:100%}
+
+/* 图表 */
+.n60 .chart{grid-column:span 8;display:flex;flex-direction:column}
+.n60 .legend{display:flex;gap:14px;font-size:11.5px;color:var(--ink3)}
+.n60 .legend i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:5px;vertical-align:1px}
+.n60 .chartbox{flex:1 1 0;min-height:132px;margin-top:10px}
+.n60 .chartbox svg{display:block;width:100%;height:100%}
+
+/* 表格 */
+.n60 .tbl{grid-column:span 12}
+.n60 table{width:100%;border-collapse:collapse;font-size:12.8px;table-layout:fixed}
+.n60 th{text-align:left;font-size:11px;color:var(--ink3);font-weight:600;letter-spacing:.03em;
+  padding:10px 0 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+/* 数值列必须与自己的表头对齐：表头也右对齐，并给固定列宽 */
+.n60 th.r{text-align:right}
+.n60 th:nth-child(1){width:32%}
+.n60 th:nth-child(2){width:22%}
+.n60 th:nth-child(3){width:17%}
+.n60 th:nth-child(4){width:15%}
+.n60 th:nth-child(5){width:14%}
+.n60 td{padding:8px 0;border-bottom:1px solid var(--line2)}
+.n60 tr:last-child td{border-bottom:none}
+.n60 td.nm{display:flex;align-items:center;gap:9px;min-width:0}
+.n60 td.nm span.t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.n60 .dico{width:26px;height:26px;border-radius:8px;background:#f3f5f9;display:grid;place-items:center;flex:0 0 auto}
+.n60 .dico svg{width:13px;height:13px;stroke:#7c8494;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.n60 td.r{text-align:right;padding-left:14px;font-variant-numeric:tabular-nums}
+.n60 th.r{font-variant-numeric:tabular-nums}
+.n60 td.r.live{color:var(--blue);font-weight:600}
+.n60 td.ip{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink2)}
+.n60 td.dim{color:var(--ink3)}
+/* 没有 bandix 时（兜底模式）：速率/今日两列无数据来源，整列隐藏，别留两排“—” */
+.n60 .tbl.fb th.r,.n60 .tbl.fb td.r{display:none}
+.n60 .tbl.fb th:nth-child(1){width:46%}
+.n60 .tbl.fb th:nth-child(2){width:30%}
+.n60 .tbl.fb th:nth-child(3){width:24%}
+.n60 .pill-soft{font-size:10.5px;padding:1px 6px;border-radius:5px;background:var(--line2);color:var(--ink2);white-space:nowrap}
+.n60 .pill-soft.w{background:#f3f0ff;color:#6143d0}
+.n60 .pill-soft.l{background:#eef4ff;color:#2f5fc4}
+.n60 .empty{padding:22px 0;color:var(--ink3);font-size:12.5px;text-align:center}
+
+/* 系统 */
+.n60 .sys{grid-column:span 4;display:flex;flex-direction:column}
+/* 四行等分撑满卡片，避免底部留一块空白 */
+.n60 .sys > div{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-between}
+.n60 .kv{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;
+  font-size:12.5px;color:var(--ink2);border-bottom:1px solid var(--line2)}
+.n60 .kv:last-child{border-bottom:none}
+.n60 .kv b{color:var(--ink);font-weight:400;text-align:right;word-break:break-word}
+/* 固件版本这类长值：标签在上、值换行在下面通栏，右侧对齐会挤成一坨 */
+.n60 .kv.wide{display:block;padding-top:9px}
+.n60 .kv.wide span{display:block;font-size:11.5px;color:var(--ink3);margin-bottom:4px}
+.n60 .kv.wide b{display:block;text-align:left;font-size:11px;line-height:1.5;color:var(--ink2);font-weight:400}
+
+@media(max-width:1100px){
+  .n60 .krow{grid-template-columns:repeat(2,1fr)}
+  .n60 .chart,.n60 .tbl,.n60 .sys{grid-column:span 12}
+}
+@media(max-width:560px){
+  .n60 .krow{grid-template-columns:1fr}
+  .n60 .hdr{flex-wrap:wrap;gap:10px}
+  .n60-pills{margin-left:0;width:100%}
+}
