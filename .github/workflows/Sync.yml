@@ -110,6 +110,26 @@ jobs:
             rm -rf luci-app-honk/.git
           fi
 
+      - name: Sync luci-app-daed
+        run: |
+          git clone --depth 1 https://github.com/QiuSimons/luci-app-daed.git /tmp/daed || true
+          if [ -d "/tmp/daed" ]; then
+            rm -rf luci-app-daed
+            mkdir -p luci-app-daed
+            cp -r /tmp/daed/* luci-app-daed/
+            rm -rf luci-app-daed/.git
+          fi
+
+      - name: Sync luci-app-mesh
+        run: |
+          git clone --depth 1 https://github.com/EricYin/luci-app-mesh.git /tmp/mesh || true
+          if [ -d "/tmp/mesh" ]; then
+            rm -rf luci-app-mesh
+            mkdir -p luci-app-mesh
+            cp -r /tmp/mesh/* luci-app-mesh/
+            rm -rf luci-app-mesh/.git
+          fi
+
       - name: Commit & Push changes
         run: |
           git add \
@@ -121,7 +141,9 @@ jobs:
             luci-app-lanspeed \
             openwrt-passwall2 \
             openwrt-passwall-packages \
-            luci-app-honk
+            luci-app-honk \
+            luci-app-daed \
+            luci-app-mesh
           git diff --cached --quiet || {
             git commit -m "🔄 $(date -u '+%Y-%m-%d')"
             git push origin main
