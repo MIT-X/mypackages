@@ -112,11 +112,11 @@ jobs:
 
       - name: Sync luci-app-daed
         run: |
-          git clone --depth 1 https://github.com/QiuSimons/luci-app-daed.git /tmp/daed || true
-          if [ -d "/tmp/daed" ]; then
+          git clone --depth 1 https://github.com/QiuSimons/luci-app-daed.git /tmp/daed-luci || true
+          if [ -d "/tmp/daed-luci" ]; then
             rm -rf luci-app-daed
             mkdir -p luci-app-daed
-            cp -r /tmp/daed/* luci-app-daed/
+            cp -r /tmp/daed-luci/* luci-app-daed/
             rm -rf luci-app-daed/.git
           fi
 
@@ -128,6 +128,26 @@ jobs:
             mkdir -p luci-app-mesh
             cp -r /tmp/mesh/* luci-app-mesh/
             rm -rf luci-app-mesh/.git
+          fi
+
+      - name: Sync dae
+        run: |
+          git clone --depth 1 https://github.com/daeuniverse/dae.git /tmp/dae || true
+          if [ -d "/tmp/dae" ]; then
+            rm -rf dae
+            mkdir -p dae
+            cp -r /tmp/dae/* dae/
+            rm -rf dae/.git
+          fi
+
+      - name: Sync daed
+        run: |
+          git clone --depth 1 https://github.com/daeuniverse/daed.git /tmp/daed-core || true
+          if [ -d "/tmp/daed-core" ]; then
+            rm -rf daed
+            mkdir -p daed
+            cp -r /tmp/daed-core/* daed/
+            rm -rf daed/.git
           fi
 
       - name: Commit & Push changes
@@ -142,8 +162,11 @@ jobs:
             openwrt-passwall2 \
             openwrt-passwall-packages \
             luci-app-honk \
+            dae \
+            daed
             luci-app-daed \
             luci-app-mesh
+
           git diff --cached --quiet || {
             git commit -m "🔄 $(date -u '+%Y-%m-%d')"
             git push origin main
