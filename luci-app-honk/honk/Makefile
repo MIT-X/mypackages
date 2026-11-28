@@ -5,11 +5,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=honk
-PKG_VERSION:=2026.11.26~4d1dca7
+PKG_VERSION:=2026.11.28~4b5703e
 PKG_RELEASE:=1
 
 HONK_SRC_URL:=https://github.com/daeuniverse/honk.git
-HONK_SRC_VERSION:=4d1dca7c80498408df956fd03085e807b0a5533b
+HONK_SRC_VERSION:=4b5703e3f85ac8382e93e6b46dceba6f4407d5f5
 
 PKG_LICENSE:=AGPL-3.0-only
 PKG_LICENSE_FILES:=LICENSE
@@ -32,6 +32,11 @@ define Package/honk
     +HONK_USE_VMLINUX_BTF:vmlinux-btf
 endef
 
+define Package/honk/description
+  honk is an eBPF-based transparent proxy core with native API and dae-compatible syntax.
+  This package installs the honk-core binary for use with luci-app-daeuniverse.
+endef
+
 define Package/honk/config
 	choice
 		prompt "BTF source for CO-RE"
@@ -47,13 +52,6 @@ define Package/honk/config
 	endchoice
 endef
 
-define Package/honk/conffiles
-/etc/honk/config.dae
-/etc/honk/config.d/
-/etc/honk/state/
-/etc/config/honk
-endef
-
 define Build/Prepare
 	mkdir -p "$(PKG_BUILD_DIR)"
 endef
@@ -67,19 +65,6 @@ endef
 define Package/honk/install
 	$(INSTALL_DIR) "$(1)/usr/bin"
 	$(INSTALL_BIN) "$(PKG_INSTALL_DIR)/bin/honk-core" "$(1)/usr/bin/honk-core"
-
-	$(INSTALL_DIR) "$(1)/etc/honk/config.d"
-	$(INSTALL_CONF) "$(CURDIR)/files/config.dae" "$(1)/etc/honk/config.dae"
-	$(INSTALL_CONF) "$(CURDIR)/files/config.d/node.dae" "$(1)/etc/honk/config.d/node.dae"
-	$(INSTALL_CONF) "$(CURDIR)/files/config.d/route.dae" "$(1)/etc/honk/config.d/route.dae"
-	$(INSTALL_CONF) "$(CURDIR)/files/config.d/dns.dae" "$(1)/etc/honk/config.d/dns.dae"
-	$(INSTALL_CONF) "$(CURDIR)/files/config.d/api.dae" "$(1)/etc/honk/config.d/api.dae"
-
-	$(INSTALL_DIR) "$(1)/etc/config"
-	$(INSTALL_CONF) "$(CURDIR)/files/honk.config" "$(1)/etc/config/honk"
-
-	$(INSTALL_DIR) "$(1)/etc/init.d"
-	$(INSTALL_BIN) "$(CURDIR)/files/honk.init" "$(1)/etc/init.d/honk"
 endef
 
 $(eval $(call BuildPackage,honk))
